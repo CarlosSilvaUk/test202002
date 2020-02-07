@@ -21,7 +21,29 @@ namespace AWSLambda1
         /// <returns></returns>
         public string FunctionHandler(string input, ILambdaContext context)
         {
-            return input?.ToUpper();
+            if (!decimal.TryParse(input, out var amount))
+            {
+                throw new ArgumentException("Not a number");
+            }
+
+            var paid = CalculateInterestPaid(amount);
+
+            return paid.ToString("0.00");
+        }
+
+        public double CalculateInterestRate(decimal amount)
+        {
+            if (amount >= 50000) return 0.03;
+            if (amount >= 10000) return 0.025;
+            if (amount >= 5000) return 0.02;
+            if (amount >= 1000) return 0.015;
+            if (amount >= 0) return 0.01;
+            return 0.0;
+        }
+
+        public decimal CalculateInterestPaid(decimal amount)
+        {
+            return Math.Round(amount * (decimal)CalculateInterestRate(amount), 2);
         }
     }
 }
