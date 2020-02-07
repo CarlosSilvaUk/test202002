@@ -23,5 +23,14 @@ namespace tests.Accounts
             var account = new Account(amount);
             Assert.Equal(rate, account.CalculateInterestRate());
         }
+
+        [Theory]
+        [InlineData(-1, 0)]
+        [InlineData(1001, 15.02)]
+        public void CalculateInterestPaidTestCases(decimal amount, decimal paid)
+        {
+            var account = new Account(amount);
+            Assert.Equal(paid, account.CalculateInterestPaid());
+        }
     }
 }

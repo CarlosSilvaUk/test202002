@@ -1,4 +1,6 @@
-﻿namespace app.Accounts
+﻿using System;
+
+namespace app.Accounts
 {
     public class Account
     {
@@ -17,6 +19,11 @@
             if (Balance >= 1000) return 0.015;
             if (Balance >= 0) return 0.01;
             return 0.0;
+        }
+
+        public decimal CalculateInterestPaid()
+        {
+            return Math.Round(Balance * (decimal)CalculateInterestRate() ,2);
         }
     }
 }
