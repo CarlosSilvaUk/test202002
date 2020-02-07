@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace app.Output
+﻿namespace app.Output
 {
     public interface IOutput
     {
